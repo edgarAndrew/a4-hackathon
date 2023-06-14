@@ -1,0 +1,6 @@
+books/node_modules
+books/.env
+lending/node_modules
+lending/.env
+students/node_modules
+students/.env
