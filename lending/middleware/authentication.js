@@ -11,7 +11,7 @@ async function authenticationMiddleware(req,res,next){
         const {userId,username,isAdmin} = payload;
         req.user = {userId,username,isAdmin};
     }catch(err){
-        throw new UnauthenticatedError("You are not allowed to access the API")
+        throw new UnauthenticatedError("You are not allowed to access this API route")
     }
     next();
 }

@@ -10,6 +10,7 @@ const connectDB = require('./db/connect')
 const cookieParser = require('cookie-parser')
 
 const authRouter = require('./api/auth')
+const lendingRouter = require('./api/lending')
 
 const notFoundMiddleware = require('./middleware/not-found')
 const errorHandlerMiddleware = require('./middleware/error-handler')
@@ -41,6 +42,7 @@ app.use(cors(
 app.use(xss());
 
 app.use('/lending/api/v1/auth',authRouter)
+app.use('/lending/api/v2',lendingRouter)
 
 app.use(notFoundMiddleware);
 app.use(errorHandlerMiddleware);

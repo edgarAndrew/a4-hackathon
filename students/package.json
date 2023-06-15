@@ -2,10 +2,10 @@
   "name": "a4-students-api",
   "version": "1.0.0",
   "description": "API for students app",
-  "main": "app.js",
+  "main": "index.js",
   "scripts": {
-    "test": "nodemon app.js",
-    "start": "node app.js"
+    "test": "nodemon index.js",
+    "start": "node index.js"
   },
   "author": "edgarAndrew",
   "license": "ISC",

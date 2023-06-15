@@ -35,4 +35,4 @@ const logout = async(req,res)=>{
     res.status(StatusCodes.OK).json({user:{id:userId,name:username},status:"Logout Successfull"})
 }
 
-module.exports = {register,login,logout,verifyToken}
+module.exports = {login,logout,verifyToken}
