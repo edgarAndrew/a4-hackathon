@@ -35,8 +35,16 @@ const takeBook = async(req,res)=>{
         throw new BadRequestError('No copies of this book are available')
 }
 
+// only admin or librarian can do return book
 const returnBook = async(req,res) =>{
     const {student,book} = req.body;
+    const {userId,isAdmin} = req.user
+    
+    if(!isAdmin){
+        const user = await User.findById(userId);
+        if(!user.isLibrarian)
+            throw new UnauthenticatedError('Only Admin and librarian can do return book')
+    }
     
     if(!student || !book)
         throw new BadRequestError("Provide student,book in request body")
