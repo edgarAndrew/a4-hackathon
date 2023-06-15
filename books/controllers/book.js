@@ -30,6 +30,19 @@ const getAllBooks = async(req,res)=>{
     const books = await Book.find({})
     res.status(StatusCodes.OK).json({books})
 }
+const searchBook = async(req,res)=>{
+    const title = req.query.title
+    const author = req.query.author
+
+    let book = []
+
+    if(title)
+        book = await Book.find( { 'title' : { '$regex' : title, '$options' : 'i' } } )
+    if(author)
+        book = await Book.find( { 'author' : { '$regex' : author, '$options' : 'i' } } )
+    
+    res.status(StatusCodes.OK).json({book})
+}
 
 
-module.exports = {addBook,updateBook,removeBook,getBook,getAllBooks}
+module.exports = {addBook,updateBook,removeBook,getBook,getAllBooks,searchBook}

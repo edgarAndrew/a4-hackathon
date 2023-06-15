@@ -1,39 +1,6 @@
 const User = require('../models/User')
 const {StatusCodes} = require('http-status-codes')
 const {UnauthenticatedError,BadRequestError} = require('../errors')
-const fs = require('fs');
-
-// to register a student
-const register = async(req,res)=>{
-    const {email,password,username,contact,image} = req.body;
-    const {isAdmin} = req.user
-
-    if(!isAdmin)
-        throw new UnauthenticatedError("Only Admin can register a student")
-
-    if(!email || !password || !username || !contact)
-        throw new BadRequestError("Provide username,email,password,contact")
-    
-    // NOTE: image should be base64
-    const base64Pattern = /^data:image\/[a-zA-Z]*;base64,/;
-    if(image){
-        if(!base64Pattern.test(image))
-            throw new BadRequestError("Image should be base64")
-        req.body.profilePicture = image;
-    }
-    
-    req.body.isStudent = true;
-    const user = await User.create({...req.body})
-    const token = user.createJWT();
-    
-     // For local setup
-     res.cookie('jwt',token,{httpOnly:true,expires:new Date(Date.now()+1.728e+8)})
-    
-     // While in production
-     //res.cookie("jwt", token, { httpOnly: true,expires:new Date(Date.now()+1.728e+8), sameSite: "None", secure: true })
-    
-    res.status(StatusCodes.CREATED).json({user:{name:user.getName(),id:user.getId()}})
-}
 
 // login for admin or librarian
 const login = async(req,res)=>{
@@ -69,4 +36,4 @@ const logout = async(req,res)=>{
     res.status(StatusCodes.OK).json({user:{id:userId,name:username},status:"Logout Successfull"})
 }
 
-module.exports = {register,login,logout,verifyToken}
+module.exports = {login,logout,verifyToken}
