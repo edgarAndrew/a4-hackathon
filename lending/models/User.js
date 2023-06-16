@@ -61,6 +61,16 @@ UserSchema.methods.getName = function(){
 UserSchema.methods.getId = function(){
     return this._id;
 }
+UserSchema.methods.getEmail = function(){
+    return this.email;
+}
+UserSchema.methods.getContact = function(){
+    return this.contact;
+}
+UserSchema.methods.getProfilePic = function(){
+    return this.profilePicture;
+}
+
 UserSchema.methods.createJWT = function(){
     return jwt.sign({userId:this._id,username:this.username,isAdmin:this.isAdmin},process.env.JWT_SECRET,{expiresIn:process.env.JWT_LIFETIME})
 }

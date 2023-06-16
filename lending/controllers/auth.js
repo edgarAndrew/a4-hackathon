@@ -20,7 +20,7 @@ const login = async(req,res)=>{
     
     // While in production
     //res.cookie("jwt", token, { httpOnly: true, sameSite: "None", secure: true })
-    res.status(StatusCodes.OK).json({user:{name:user.getName(),id:user.getId()}})
+    res.status(StatusCodes.OK).json({user:{username:user.getName(),_id:user.getId(),email:user.getEmail(),contact:user.getContact(),profilePicture:user.getProfilePic()}})
 }
 
 // verify token route will go through the authentication middleware, so if no cookie present then error thrown
