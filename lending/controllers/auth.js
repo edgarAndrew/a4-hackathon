@@ -15,11 +15,11 @@ const login = async(req,res)=>{
         throw new UnauthenticatedError('Invalid Credentials')
     const token = user.createJWT();
     
-    // For local setup
-    res.cookie('jwt',token,{httpOnly:true})
+    // For local setup or Postman use
+    //res.cookie('jwt',token,{httpOnly:true})
     
-    // While in production
-    //res.cookie("jwt", token, { httpOnly: true, sameSite: "None", secure: true })
+    // While in production or browser use
+    res.cookie("jwt", token, { httpOnly: true, sameSite: "None", secure: true })
     res.status(StatusCodes.OK).json({user:{username:user.getName(),_id:user.getId(),email:user.getEmail(),contact:user.getContact(),profilePicture:user.getProfilePic()}})
 }
 
