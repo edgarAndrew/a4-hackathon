@@ -20,12 +20,14 @@ const login = async(req,res)=>{
     
     // While in production or browser use
     res.cookie("jwt", token, { httpOnly: true, sameSite: "None", secure: true })
-    res.status(StatusCodes.OK).json({user:{username:user.getName(),_id:user.getId(),email:user.getEmail(),contact:user.getContact(),profilePicture:user.getProfilePic()}})
+    res.status(StatusCodes.OK).json({user:{username:user.getName(),_id:user.getId(),email:user.getEmail(),contact:user.getContact(),profilePicture:user.getProfilePic(),isAdmin:user.isAdmin,isLibrarian:user.isLibrarian,isStudent:user.isStudent}})
 }
 
 // verify token route will go through the authentication middleware, so if no cookie present then error thrown
 const verifyToken = async(req,res)=>{
-    res.status(StatusCodes.OK).json({status:"Token verified"})
+    const {userId} = req.user
+    const user = await User.findById(userId).select("isAdmin isLibrarian isStudent")
+    res.status(StatusCodes.OK).json({status:"Token verified",user})
 }
 const logout = async(req,res)=>{
     // logout request has to go through authentication middleware
