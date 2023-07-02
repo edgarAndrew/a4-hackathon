@@ -55,7 +55,7 @@ export const loadUser = ()=>async(dispatch)=>{
         console.log(error.response.data,error.response.status)
         dispatch({
             type:"LoadUserFailure",
-            payload:error.response.data.detail
+            payload:error.response.data
         })
     }    
 }
@@ -73,7 +73,7 @@ export const logout = ()=>async(dispatch)=>{
         console.log(error.response.data,error.response.status)
         dispatch({
             type:"LogoutUserFailure",
-            payload:error.response.data
+            payload:error.response.data.msg
         })
     }    
     

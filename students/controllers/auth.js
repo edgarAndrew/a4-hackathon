@@ -35,7 +35,7 @@ const logout = async(req,res)=>{
     // logout request has to go through authentication middleware
     // so if token cookie is not provided , error will be thrown
     const {userId,username} = req.user;
-    res.clearCookie("jwt")
+    res.clearCookie("jwt",{sameSite: "None",secure: true})
     res.status(StatusCodes.OK).json({user:{id:userId,name:username},status:"Logout Successfull"})
 }
 
