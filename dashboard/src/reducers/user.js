@@ -12,7 +12,7 @@ export const userReducer = createReducer(initialState,{
     },
     LoginSuccess: (state,action)=>{
         state.loading = false;
-        state.profile = action.payload;
+        state.profile = action.payload
         state.isAuthenticated = true;
     },
     LoginFailure: (state,action)=>{
@@ -53,6 +53,8 @@ export const userReducer = createReducer(initialState,{
 
     clearErrors:(state,action)=>{
         state.error = null
+    },
+    clearMessages:(state,action)=>{
         state.message = null
     }
 })

@@ -6,17 +6,18 @@ import logo from '../../assets/logo/twist.png'
 import {
   Home,
   HomeOutlined,
-  Settings,
-  SettingsOutlined,
   Close,
-  Book,
-  BookOutlined,
-  VoiceChat,
-  VoiceChatOutlined
+  LibraryBooks,
+  LibraryBooksOutlined,
+  Group,
+  GroupOutlined,
+  Summarize,
+  SummarizeOutlined
 } from "@mui/icons-material";
 import { Typography, IconButton, Button } from "@mui/material";
 import { MenuContext } from "react-flexible-sliding-menu";
 import { useDispatch, useSelector } from "react-redux";
+import { Forward, ForwardOutlined } from "@material-ui/icons";
 
 const Sidebar = () => {
   const { loading, isAuthenticated,profile } = useSelector((state) => state.user);
@@ -66,9 +67,9 @@ const Sidebar = () => {
           }}
         >
           {tab === "/books" ? (
-            <Settings style={{ color: "#0008C1" }} />
+            <LibraryBooks style={{ color: "#0008C1" }} />
           ) : (
-            <SettingsOutlined />
+            <LibraryBooksOutlined />
           )}
           <Typography variant="subtitle1">Books</Typography>
         </NavLink>
@@ -82,12 +83,62 @@ const Sidebar = () => {
           }}
         >
           {tab === "/students" ? (
-            <Book style={{ color: "#0008C1" }} />
+            <Group style={{ color: "#0008C1" }} />
           ) : (
-            <BookOutlined />
+            <GroupOutlined />
           )}
           <Typography variant="subtitle1">Students</Typography>
         </NavLink>
+        
+
+        <NavLink
+          to="/issue-book"
+          className={({ isActive }) => (isActive ? classes.active : undefined)}
+          onClick={(e) => {
+            setTab("/issue-book");
+            toggleMenu();
+          }}
+        >
+          {tab === "/issue-book" ? (
+            <Forward style={{ color: "#0008C1" }} />
+          ) : (
+            <ForwardOutlined />
+          )}
+          <Typography variant="subtitle1">Issue book</Typography>
+        </NavLink>
+
+
+        <NavLink
+          to="/return-book"
+          className={({ isActive }) => (isActive ? classes.active : undefined)}
+          onClick={(e) => {
+            setTab("/return-book");
+            toggleMenu();
+          }}
+        >
+          {tab === "/return-book" ? (
+            <Forward style={{ color: "#0008C1",transform:"rotate(180deg)" }} />
+          ) : (
+            <ForwardOutlined style={{transform:"rotate(180deg)"}} />
+          )}
+          <Typography variant="subtitle1">Return book</Typography>
+        </NavLink>
+
+        <NavLink
+          to="/lendings"
+          className={({ isActive }) => (isActive ? classes.active : undefined)}
+          onClick={(e) => {
+            setTab("/lending");
+            toggleMenu();
+          }}
+        >
+          {tab === "/lendings" ? (
+            <Summarize style={{ color: "#0008C1" }} />
+          ) : (
+            <SummarizeOutlined />
+          )}
+          <Typography variant="subtitle1">Lendings</Typography>
+        </NavLink>        
 
         {isAuthenticated && (
           <Button component={NavLink} onClick={logoutHandler} to="/">

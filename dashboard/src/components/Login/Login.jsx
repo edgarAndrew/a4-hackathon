@@ -12,28 +12,23 @@ const Login = () => {
   const dispatch = useDispatch();
   const alert = useAlert();
 
-  const {loading} = useSelector((state)=>state.user)
-
-  const navigate = useNavigate();
+  const {loading,error,message} = useSelector((state)=>state.user)
 
   const loginHandler = (e) => {
     e.preventDefault();
     dispatch(login(email, password));
   };
 
-  // useEffect(() => {
-  //   if (error) {
-  //     alert.error(error.message);
-  //     dispatch({ type: "clearErrors" });
-  //   }
-  //   if (message) {
-  //     alert.success(message);
-  //     dispatch({ type: "clearErrors" });
-  //   }
-  //   if (isAuthenticated === true) {
-  //     navigate("/");
-  //   }
-  // }, [dispatch, error, alert, message]);
+  useEffect(() => {
+    if (error) {
+      alert.error(error);
+      dispatch({ type: "clearErrors" });
+    }
+    if (message) {
+      alert.success(message);
+      dispatch({ type: "clearMessages" });
+    }
+  }, [dispatch, error, alert, message]);
 
   if (loading)
     return (
@@ -49,7 +44,7 @@ const Login = () => {
             variant="h3"
             style={{ padding: "2vmax", textAlign: "center" }}
           >
-            Twist Hunt
+            Yolo Library
           </Typography>
           <input
             type="email"
