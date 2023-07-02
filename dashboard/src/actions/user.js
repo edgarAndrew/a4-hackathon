@@ -1,27 +1,42 @@
 import axios from "axios"
 import '../axios'
-import { lendingURL } from "../axios"
+import { studentURL } from "../axios"
 
 export const login = (email,password)=>async(dispatch)=>{
+    let cond = false
     try {
         dispatch({
             type:"LoginRequest"
         })
-        const {data} = await axios.post(`${lendingURL}/lending/api/v1/auth/login/`,{email,password},{
+        const {data} = await axios.post(`${studentURL}/students/api/v1/auth/login/`,{email,password},{
             headers:{
                 "Content-Type":"application/json"
             }
         })
+        
+        if (data.user.isStudent) {
+            cond = true;
+            throw new Error("Students are not allowed access")
+        }
+
         dispatch({
             type:"LoginSuccess",
             payload:data.user
         })
     } catch (error) {
-        console.log(error.response.data,error.response.status)
-        dispatch({
-            type:"LoginFailure",
-            payload:error.response.data
-        })
+        if(cond){
+            dispatch({
+                type:"LoginFailure",
+                payload:"Students are not allowed access"
+            })
+
+        }else{
+            console.log(error.response.data,error.response.status)
+            dispatch({
+                type:"LoginFailure",
+                payload:error.response.data.msg
+            })
+        }
     }    
 }
 
@@ -30,10 +45,11 @@ export const loadUser = ()=>async(dispatch)=>{
         dispatch({
             type:"LoadUserRequest"
         })
-        const {data} = await axios.get(`${lendingURL}/lending/api/v1/auth/verify-jwt`)
+        const {data} = await axios.get(`${studentURL}/students/api/v1/auth/verify-jwt`)
         dispatch({
             type:"LoadUserSuccess",
-            payload:data
+            payload:data.status,
+            payload1:data.user
         })
     } catch (error) {
         console.log(error.response.data,error.response.status)
@@ -48,7 +64,7 @@ export const logout = ()=>async(dispatch)=>{
         dispatch({
             type:"LogoutUserRequest"
         })
-        const {data} = await axios.get(`${lendingURL}/lending/api/v1/auth/logout`)
+        const {data} = await axios.get(`${studentURL}/students/api/v1/auth/logout`)
         dispatch({
             type:"LogoutUserSuccess",
             payload:"User Logged Out"

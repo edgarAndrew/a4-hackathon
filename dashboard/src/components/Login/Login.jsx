@@ -12,6 +12,8 @@ const Login = () => {
   const dispatch = useDispatch();
   const alert = useAlert();
 
+  const {loading} = useSelector((state)=>state.user)
+
   const navigate = useNavigate();
 
   const loginHandler = (e) => {
@@ -33,13 +35,13 @@ const Login = () => {
   //   }
   // }, [dispatch, error, alert, message]);
 
-  // if (loading)
-  //   return (
-  //     <Backdrop open={true}>
-  //       <CircularProgress />
-  //     </Backdrop>
-  //   );
-  // else
+  if (loading)
+    return (
+      <Backdrop open={true}>
+        <CircularProgress />
+      </Backdrop>
+    );
+  else
     return (
       <div className="login">
         <form className="loginForm" onSubmit={loginHandler}>

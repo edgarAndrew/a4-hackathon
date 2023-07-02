@@ -19,11 +19,11 @@ import { MenuContext } from "react-flexible-sliding-menu";
 import { useDispatch, useSelector } from "react-redux";
 
 const Sidebar = () => {
-  const { loading, isAuthenticated } = useSelector((state) => state.user);
+  const { loading, isAuthenticated,profile } = useSelector((state) => state.user);
   const dispatch = useDispatch()
   const [tab, setTab] = useState(window.location.pathname);
   const { toggleMenu } = useContext(MenuContext);
-
+  
   const logoutHandler = () =>{
     dispatch(logout())
   }
