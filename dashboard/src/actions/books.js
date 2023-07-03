@@ -1,6 +1,6 @@
 import axios from "axios"
 import '../axios'
-import { booksURL } from "../axios"
+import { booksURL,lendingURL } from "../axios"
 
 export const allBooks = ()=>async(dispatch)=>{
     try {
@@ -123,6 +123,46 @@ export const deleteBook = (id)=>async(dispatch)=>{
         console.log(error.response.data,error.response.status)
         dispatch({
             type:"RemoveBookFailure",
+            payload:error.response.data.msg
+        })
+    }    
+}
+export const studentsTakenBook = (id)=>async(dispatch)=>{
+    try {
+        dispatch({
+            type:"StudentsTakenBookRequest"
+        })
+        const {data} = await axios.get(`${lendingURL}/lending/api/v2/students-taken/${id}`)
+        dispatch({
+            type:"StudentsTakenBookSuccess",
+            payload:data.students
+        })
+    } catch (error) {
+        console.log(error.response.data,error.response.status)
+        dispatch({
+            type:"StudentsTakenBookFailure",
+            payload:error.response.data.msg
+        })
+    }    
+}
+export const returnBook = (student,book)=>async(dispatch)=>{
+    try {
+        dispatch({
+            type:"ReturnBookRequest"
+        })
+        const {data} = await axios.post(`${lendingURL}/lending/api/v2/return`,{student,book},{
+            headers:{
+                "Content-Type":"application/json"
+            }
+        })
+        dispatch({
+            type:"ReturnBookSuccess",
+            payload:data.msg
+        })
+    } catch (error) {
+        console.log(error.response.data,error.response.status)
+        dispatch({
+            type:"ReturnBookFailure",
             payload:error.response.data.msg
         })
     }    

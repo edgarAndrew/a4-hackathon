@@ -79,6 +79,7 @@ export const studentReducer = createReducer(initialState,{
 
     StudentBooksRequest: (state,action)=>{
         state.loading1 = true;
+        state.books = null
     },
     StudentBooksSuccess: (state,action)=>{
         state.books = action.payload;

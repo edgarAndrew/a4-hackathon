@@ -77,6 +77,31 @@ export const bookReducer = createReducer(initialState,{
         state.error = action.payload
     },
 
+    StudentsTakenBookRequest: (state,action)=>{
+        state.students = null
+        state.loading1 = true;
+    },
+    StudentsTakenBookSuccess: (state,action)=>{
+        state.students = action.payload;
+        state.loading1 = false;
+    },
+    StudentsTakenBookFailure: (state,action)=>{
+        state.loading1 = false;     
+        state.error = action.payload
+    },
+
+    ReturnBookRequest: (state,action)=>{
+        state.loading1 = true;
+    },
+    ReturnBookSuccess: (state,action)=>{
+        state.message = action.payload;
+        state.loading1 = false;
+    },
+    ReturnBookFailure: (state,action)=>{
+        state.error = action.payload
+        state.loading1 = false;     
+    },
+
     clearErrors:(state,action)=>{
         state.error = null
     },

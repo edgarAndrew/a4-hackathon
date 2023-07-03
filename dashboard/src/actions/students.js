@@ -135,6 +135,7 @@ export const booksByStudent = (id)=>async(dispatch)=>{
             type:"StudentBooksRequest"
         })
         const {data} = await axios.get(`${lendingURL}/lending/api/v2/books-taken/${id}`)
+        console.log(data)
         dispatch({
             type:"StudentBooksSuccess",
             payload:data.books
