@@ -91,7 +91,7 @@ const booksTakenByStudent = async(req,res) =>{
     console.log(bookId)
     books = await Promise.all(
         bookId.map(async (el) => {
-          let book = await Book.findById(el.book).select("title author isbn");
+          let book = await Book.findById(el.book).select("title author isbn description");
           const data = {
             status: el.status,
             issueDate: el.issueDate,
