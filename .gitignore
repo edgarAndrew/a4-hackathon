@@ -4,3 +4,4 @@ lending/node_modules
 lending/.env
 students/node_modules
 students/.env
+dashboard/node_modules

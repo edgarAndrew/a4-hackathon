@@ -15,24 +15,27 @@ const login = async(req,res)=>{
         throw new UnauthenticatedError('Invalid Credentials')
     const token = user.createJWT();
     
-    // For local setup
-    res.cookie('jwt',token,{httpOnly:true})
+    // For local setup and postman use
+    //res.cookie('jwt',token,{httpOnly:true})
     
-    // While in production
-    //res.cookie("jwt", token, { httpOnly: true, sameSite: "None", secure: true })
+    // While in production or browser
+    res.cookie("jwt", token, { httpOnly: true, sameSite: "None", secure: true })
     
-    res.status(StatusCodes.OK).json({user:{name:user.getName(),id:user.getId()}})
+    //res.status(StatusCodes.OK).json({user:{name:user.getName(),id:user.getId()}})
+    res.status(StatusCodes.OK).json({user:{username:user.getName(),_id:user.getId(),isAdmin:user.isAdmin,isLibrarian:user.isLibrarian,isStudent:user.isStudent}})
 }
 
 // verify token route will go through the authentication middleware, so if no cookie present then error thrown
 const verifyToken = async(req,res)=>{
-    res.status(StatusCodes.OK).json({status:"Token verified"})
+    const {userId} = req.user
+    const user = await User.findById(userId).select("isAdmin isLibrarian isStudent")
+    res.status(StatusCodes.OK).json({status:"Token verified",user})
 }
 const logout = async(req,res)=>{
     // logout request has to go through authentication middleware
     // so if token cookie is not provided , error will be thrown
     const {userId,username} = req.user;
-    res.clearCookie("jwt")
+    res.clearCookie("jwt",{sameSite: "None",secure: true})
     res.status(StatusCodes.OK).json({user:{id:userId,name:username},status:"Logout Successfull"})
 }
 

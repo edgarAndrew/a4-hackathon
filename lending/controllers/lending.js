@@ -82,16 +82,23 @@ const booksTakenByStudent = async(req,res) =>{
     let books = []
     let bookId = []
     if(status == 'issued'){
-        bookId = await Transaction.find({status:'issued',student:student}).select('book')
+        bookId = await Transaction.find({status:'issued',student:student}).select('book status issueDate')
     }else if(status == 'returned'){
-        bookId = await Transaction.find({status:'returned',student:student}).select('book')
+        bookId = await Transaction.find({status:'returned',student:student}).select('book status issueDate')
     }else{
-        bookId = await Transaction.find({student:student}).select('book')
+        bookId = await Transaction.find({student:student}).select('book status issueDate')
     }
+    console.log(bookId)
     books = await Promise.all(
         bookId.map(async (el) => {
-          const book = await Book.findById(el.book);
-          return book;
+          let book = await Book.findById(el.book).select("title author isbn");
+          const data = {
+            status: el.status,
+            issueDate: el.issueDate,
+          };
+          if(book)
+            return {...book._doc,...data}
+          return {...data}
         })
     );
     res.status(StatusCodes.OK).json({books})
@@ -111,16 +118,22 @@ const studentsTakenBook = async(req,res)=>{
 
     let studentsId = []
     if(status == 'issued'){
-        studentsId = await Transaction.find({status:'issued',book:book}).select('student')
+        studentsId = await Transaction.find({status:'issued',book:book}).select('student status issueDate')
     }else if(status == 'returned'){
-        studentsId = await Transaction.find({status:'returned',book:book}).select('student')
+        studentsId = await Transaction.find({status:'returned',book:book}).select('student status issueDate')
     }else{
-        studentsId = await Transaction.find({book:book}).select('student')
+        studentsId = await Transaction.find({book:book}).select('student status issueDate')
     }
     const students = await Promise.all(
         studentsId.map(async (el) => {
-          const student = await User.findById(el.student).select("_id username email contact");
-          return student;
+          let student = await User.findById(el.student).select("_id username email contact");
+          const data = {
+            status: el.status,
+            issueDate: el.issueDate,
+          };
+          if(student)
+            return {...student._doc,...data}
+          return {...data}
         })
     );
     res.status(StatusCodes.OK).json({students})
