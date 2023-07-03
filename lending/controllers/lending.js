@@ -38,6 +38,8 @@ const takeBook = async(req,res)=>{
 // only admin or librarian can do return book
 const returnBook = async(req,res) =>{
     const {student,book} = req.body;
+    // console.log(req.user);
+    // Removed as showing some error
     const {userId,isAdmin} = req.user
     
     if(!isAdmin){
@@ -147,3 +149,4 @@ const notReturned = async(req,res)=>{
 }
 
 module.exports = {takeBook,returnBook,booksTakenByStudent,studentsTakenBook,getTransactions,notReturned}
+
