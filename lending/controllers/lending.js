@@ -88,6 +88,7 @@ const booksTakenByStudent = async(req,res) =>{
     }else{
         bookId = await Transaction.find({student:student}).select('book status issueDate')
     }
+    console.log(bookId)
     books = await Promise.all(
         bookId.map(async (el) => {
           let book = await Book.findById(el.book).select("title author isbn");
@@ -95,7 +96,9 @@ const booksTakenByStudent = async(req,res) =>{
             status: el.status,
             issueDate: el.issueDate,
           };
-          return {...book._doc,...data}
+          if(book)
+            return {...book._doc,...data}
+          return {...data}
         })
     );
     res.status(StatusCodes.OK).json({books})
@@ -128,7 +131,9 @@ const studentsTakenBook = async(req,res)=>{
             status: el.status,
             issueDate: el.issueDate,
           };
-          return {...student._doc,...data}
+          if(student)
+            return {...student._doc,...data}
+          return {...data}
         })
     );
     res.status(StatusCodes.OK).json({students})

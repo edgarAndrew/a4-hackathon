@@ -14,6 +14,7 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import { useDispatch,useSelector } from "react-redux";
 import { studentsTakenBook,returnBook } from "../../actions/books";
+import {useAlert} from "react-alert"
 
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
@@ -43,13 +44,25 @@ export default function BooksModal({ isOpen, onCloseModal, selectedRowId }) {
     
   const dispatch = useDispatch()
   const {students,loading1,message} = useSelector((state)=>state.book)
-  
+  const alert = useAlert()
+
   React.useEffect(()=>{
       dispatch(studentsTakenBook(selectedRowId))
   },[])
 
-  const handleReturn = (studentId) =>{
+  React.useEffect(()=>{
+    if(message){
+      alert.success(message)
+      dispatch({
+        type:"clearMessages"
+      })
+    }
+  },[message])
+
+  const handleReturn = (studentId,e) =>{
+    e.target.style.display = "none";
     dispatch(returnBook(studentId,selectedRowId))
+    //onCloseModal()
   }
 
   const formComponent = () => {
@@ -76,13 +89,20 @@ export default function BooksModal({ isOpen, onCloseModal, selectedRowId }) {
                   </StyledTableCell>
                   <StyledTableCell align="right">{row.issueDate.slice(0,10)}</StyledTableCell>
                   <StyledTableCell align="right">{row.status}</StyledTableCell>
-                  <StyledTableCell align="right">{row.username}</StyledTableCell>
-                  <StyledTableCell align="right">{row.email}</StyledTableCell>
-                  <StyledTableCell align="right">{row.contact}</StyledTableCell>
+                  {row.username ?
+                    <>
+                      <StyledTableCell align="right">{row?.username}</StyledTableCell>
+                      <StyledTableCell align="right">{row?.email}</StyledTableCell>
+                      <StyledTableCell align="right">{row?.contact}</StyledTableCell>
+                    </> 
+                    :
+                    <StyledTableCell colSpan={2} align="right">Student record deleted</StyledTableCell>
+                  }
+                  
                   {
-                    row.status === 'issued' ? 
+                    row.status === 'issued' && row.username ? 
                     <StyledTableCell align="right">
-                      <Button onClick={()=>handleReturn(row._id)}>
+                      <Button onClick={(e)=>handleReturn(row._id,e)}>
                         Return
                       </Button>
                     </StyledTableCell>

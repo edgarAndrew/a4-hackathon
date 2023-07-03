@@ -15,7 +15,6 @@ import Students from "./components/Students/Students"
 import AddStudent from "./components/Students/AddStudent/AddStudent";
 import EditStudent from "./components/Students/EditStudent/EditStudent";
 import Issue from "./components/Issue/Issue";
-import Returns from "./components/Returns/Returns";
 import Lendings from "./components/Lendings/Lendings";
 
 function App() {
@@ -39,7 +38,6 @@ function App() {
             <Route path="/books/edit/:id" element={isAuthenticated ? <EditBook/> : <Login />}/>
             
             <Route path="/issue-book" element={isAuthenticated ? <Issue/> : <Login />}/>
-            <Route path="/return-book" element={isAuthenticated ? <Returns/> : <Login />}/>
             
             <Route path="/students" element={isAuthenticated ? <Students/> : <Login />}/>
             <Route path="/students/add" element={isAuthenticated ? <AddStudent/> : <Login />}/>

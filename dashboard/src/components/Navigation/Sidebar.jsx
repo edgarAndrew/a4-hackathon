@@ -107,23 +107,6 @@ const Sidebar = () => {
           <Typography variant="subtitle1">Issue book</Typography>
         </NavLink>
 
-
-        <NavLink
-          to="/return-book"
-          className={({ isActive }) => (isActive ? classes.active : undefined)}
-          onClick={(e) => {
-            setTab("/return-book");
-            toggleMenu();
-          }}
-        >
-          {tab === "/return-book" ? (
-            <Forward style={{ color: "#0008C1",transform:"rotate(180deg)" }} />
-          ) : (
-            <ForwardOutlined style={{transform:"rotate(180deg)"}} />
-          )}
-          <Typography variant="subtitle1">Return book</Typography>
-        </NavLink>
-
         <NavLink
           to="/lendings"
           className={({ isActive }) => (isActive ? classes.active : undefined)}
