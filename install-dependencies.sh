@@ -3,12 +3,12 @@
 # Start Server 1
 echo "Installing dependencies..."
 cd books
-npm i &
+npm i --legacy-peer-deps &
 cd ..
 cd lending
-npm i &
+npm i --legacy-peer-deps &
 cd ..
 cd students
-npm i &
+npm i --legacy-peer-deps &
 
 echo "All dependencies installed"
