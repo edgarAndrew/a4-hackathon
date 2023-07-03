@@ -44,5 +44,10 @@ const searchBook = async(req,res)=>{
     res.status(StatusCodes.OK).json({book})
 }
 
+const getNoOfBooks = async (req,res) => {
+    const rowCount = await Book.countDocuments();
+    res.status(StatusCodes.OK).json({"no_of_books":rowCount})
+}
 
-module.exports = {addBook,updateBook,removeBook,getBook,getAllBooks,searchBook}
+
+module.exports = {addBook,updateBook,removeBook,getBook,getAllBooks,searchBook,getNoOfBooks}
