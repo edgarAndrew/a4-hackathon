@@ -38,6 +38,7 @@ const takeBook = async(req,res)=>{
 // only admin or librarian can do return book
 const returnBook = async(req,res) =>{
     const {student,book} = req.body;
+    console.log(req.user);
     const {userId,isAdmin} = req.user
     
     if(!isAdmin){
@@ -86,21 +87,43 @@ const booksTakenByStudent = async(req,res) =>{
     }else if(status == 'returned'){
         bookId = await Transaction.find({status:'returned',student:student}).select('book status issueDate')
     }else{
-        bookId = await Transaction.find({student:student}).select('book status issueDate')
+        bookId = await Transaction.find({student:student}).select('book status issueDate dueDate')
     }
-    console.log(bookId)
+    console.log(Date.now);
     books = await Promise.all(
         bookId.map(async (el) => {
-          let book = await Book.findById(el.book).select("title author isbn");
+          let book = await Book.findById(el.book).select("title author isbn description");
+          let dueResult = "False";
+          if(el.status == "issued"){
+            dueResult = (el.dueDate.getTime() < Date.now)+"";
+          }
           const data = {
             status: el.status,
             issueDate: el.issueDate,
+            dueDate: el.dueDate,
+            isDue:  dueResult
           };
           if(book)
             return {...book._doc,...data}
           return {...data}
         })
     );
+    console.log(books[0].issueDate.getTime())
+
+    // Comparator for sorting according to date
+    function compare( a, b ) {
+        if ( a.issueDate.getTime() > b.issueDate.getTime() ){
+          return -1;
+        }
+        if ( a.issueDate.getTime() < b.issueDate.getTime() ){
+          return 1;
+        }
+        return 0;
+      }
+
+      books.sort(compare);
+      console.log(books);
+      
     res.status(StatusCodes.OK).json({books})
 }
 
@@ -156,7 +179,9 @@ const getTransactions = async(req,res)=>{
 // Transactions exceeding due date
 const notReturned = async(req,res)=>{
     const transactions = await Transaction.find({ status:'issued',dueDate: { $lt: new Date() } });
+    console.log({ status:'issued',dueDate: { $lt: new Date() } });
     res.status(StatusCodes.OK).json({transactions})
 }
 
 module.exports = {takeBook,returnBook,booksTakenByStudent,studentsTakenBook,getTransactions,notReturned}
+

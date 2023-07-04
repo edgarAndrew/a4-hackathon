@@ -28,7 +28,7 @@ const login = async(req,res)=>{
 // verify token route will go through the authentication middleware, so if no cookie present then error thrown
 const verifyToken = async(req,res)=>{
     const {userId} = req.user
-    const user = await User.findById(userId).select("isAdmin isLibrarian isStudent")
+    const user = await User.findById(userId).select("_id username email contact profilePicture isAdmin isLibrarian isStudent")
     res.status(StatusCodes.OK).json({status:"Token verified",user})
 }
 const logout = async(req,res)=>{
