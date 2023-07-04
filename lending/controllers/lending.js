@@ -38,8 +38,7 @@ const takeBook = async(req,res)=>{
 // only admin or librarian can do return book
 const returnBook = async(req,res) =>{
     const {student,book} = req.body;
-    // console.log(req.user);
-    // Removed as showing some error
+    console.log(req.user);
     const {userId,isAdmin} = req.user
     
     if(!isAdmin){
