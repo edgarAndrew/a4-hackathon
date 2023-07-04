@@ -96,7 +96,7 @@ const booksTakenByStudent = async(req,res) =>{
           let book = await Book.findById(el.book).select("title author isbn description");
           let dueResult = "False";
           if(el.status == "issued"){
-            dueResult = el.dueDate.getTime() < Date.now;
+            dueResult = (el.dueDate.getTime() < Date.now)+"";
           }
           const data = {
             status: el.status,
@@ -110,7 +110,7 @@ const booksTakenByStudent = async(req,res) =>{
         })
     );
     console.log(books[0].issueDate.getTime())
-    
+
     // Comparator for sorting according to date
     function compare( a, b ) {
         if ( a.issueDate.getTime() > b.issueDate.getTime() ){
