@@ -5,3 +5,4 @@ lending/.env
 students/node_modules
 students/.env
 dashboard/node_modules
+dashboard/dist
