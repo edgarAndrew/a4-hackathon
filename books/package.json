@@ -4,6 +4,7 @@
   "description": "API for books app",
   "main": "index.js",
   "scripts": {
+    "testing": "jest",
     "test": "nodemon index.js",
     "start": "node index.js"
   },
@@ -34,5 +35,11 @@
   },
   "engines": {
     "node": "18.x"
+  },
+  "jest": {
+    "testEnvironment": "node",
+    "coveragePathIgnorePatterns": [
+      "/node_modules/"
+    ]
   }
 }
