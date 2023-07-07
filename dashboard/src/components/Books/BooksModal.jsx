@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Box,Button } from "@mui/material";
+import { Backdrop, Box,Button, CircularProgress } from "@mui/material";
 import IconButton from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
 import CloseIcon from "@mui/icons-material/Close";
@@ -66,8 +66,14 @@ export default function BooksModal({ isOpen, onCloseModal, selectedRowId }) {
   }
 
   const formComponent = () => {
-    return (
+    return (loading1 ?
+      <Backdrop open={true}>
+        <CircularProgress />
+      </Backdrop> 
+    :
+      (
       <div>
+        <Typography variant="h4" align="center" marginBottom={3}>Students taken this book</Typography>
         <TableContainer>
         <Table sx={{ width: 1100 }} aria-label="customized table">
           <TableHead>
@@ -120,7 +126,7 @@ export default function BooksModal({ isOpen, onCloseModal, selectedRowId }) {
         </Table>
       </TableContainer>
       </div>
-    );
+    ))
 };
 
   // modal component

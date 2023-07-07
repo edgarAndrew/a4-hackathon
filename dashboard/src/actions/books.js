@@ -25,7 +25,7 @@ export const getBook = (id)=>async(dispatch)=>{
         dispatch({
             type:"GetBookRequest"
         })
-        const {data} = await axios.get(`${booksURL}/books/api/v1/book/${id}`)
+        const {data} = await axios.get(`${booksURL}/books/api/v1/book/${id}/`)
         dispatch({
             type:"GetBookSuccess",
             payload:data.book
@@ -87,7 +87,6 @@ export const searchBook = (param,value)=>async(dispatch)=>{
         dispatch({
             type:"SearchBookRequest"
         })
-        console.log(param,value)
         let res = null
         if(param === 'title'){
             const {data} = await axios.get(`${booksURL}/books/api/v1/book/search?title=${value}`);
@@ -96,7 +95,6 @@ export const searchBook = (param,value)=>async(dispatch)=>{
             const {data} = await axios.get(`${booksURL}/books/api/v1/book/search?author=${value}`)
             res = data
         }
-        console.log(param,value)
         dispatch({
             type:"SearchBookSuccess",
             payload:res.book
@@ -145,6 +143,28 @@ export const studentsTakenBook = (id)=>async(dispatch)=>{
         })
     }    
 }
+export const issueBook = (student,book)=>async(dispatch)=>{
+    try {
+        dispatch({
+            type:"IssueBookRequest"
+        })
+        const {data} = await axios.post(`${lendingURL}/lending/api/v2/`,{student,book},{
+            headers:{
+                "Content-Type":"application/json"
+            }
+        })
+        dispatch({
+            type:"IssueBookSuccess",
+            payload:data.msg
+        })
+    } catch (error) {
+        console.log(error.response.data,error.response.status)
+        dispatch({
+            type:"IssueBookFailure",
+            payload:error.response.data.msg
+        })
+    }    
+}
 export const returnBook = (student,book)=>async(dispatch)=>{
     try {
         dispatch({
@@ -163,6 +183,55 @@ export const returnBook = (student,book)=>async(dispatch)=>{
         console.log(error.response.data,error.response.status)
         dispatch({
             type:"ReturnBookFailure",
+            payload:error.response.data.msg
+        })
+    }    
+}
+export const getAllIssues = (val=null)=>async(dispatch)=>{
+    try {
+        dispatch({
+            type:"GetAllIssuesRequest"
+        })
+        let res = null
+        if(val === 'issued'){
+            const {data} = await axios.get(`${lendingURL}/lending/api/v2/?status=issued`)
+            res = data
+        }else if(val === 'returned'){
+            const {data} = await axios.get(`${lendingURL}/lending/api/v2/?status=returned`)
+            res = data
+        }else{
+            const {data} = await axios.get(`${lendingURL}/lending/api/v2/`)
+            res = data
+        }
+       
+        dispatch({
+            type:"GetAllIssuesSuccess",
+            payload:res.transactions
+        })
+    } catch (error) {
+        console.log(error.response.data,error.response.status)
+        dispatch({
+            type:"GetAllIssuesFailure",
+            payload:error.response.data.msg
+        })
+    }    
+}
+export const getIssuesPassedDueDate = ()=>async(dispatch)=>{
+    try {
+        dispatch({
+            type:"GetAllIssuesRequest"
+        })
+
+        const {data} = await axios.get(`${lendingURL}/lending/api/v2/passed-due`)
+        
+        dispatch({
+            type:"GetAllIssuesSuccess",
+            payload:data.transactions
+        })
+    } catch (error) {
+        console.log(error.response.data,error.response.status)
+        dispatch({
+            type:"GetAllIssuesFailure",
             payload:error.response.data.msg
         })
     }    

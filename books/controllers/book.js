@@ -44,5 +44,14 @@ const searchBook = async(req,res)=>{
     res.status(StatusCodes.OK).json({book})
 }
 
+const getNoOfBooks = async (req,res) => {
+    let count = 0
+    const books = await Book.find({}).select('quantity')
+    books.map((el)=>{
+        count += el.quantity
+    })
+    res.status(StatusCodes.OK).json({"copies_in_stock":count,"no_of_books":books.length})
+}
 
-module.exports = {addBook,updateBook,removeBook,getBook,getAllBooks,searchBook}
+
+module.exports = {addBook,updateBook,removeBook,getBook,getAllBooks,searchBook,getNoOfBooks}

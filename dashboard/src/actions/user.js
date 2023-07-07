@@ -1,12 +1,24 @@
 import axios from "axios"
 import '../axios'
-import { studentURL } from "../axios"
+import { booksURL, lendingURL, studentURL } from "../axios"
 
 export const login = (email,password)=>async(dispatch)=>{
     let cond = false
     try {
         dispatch({
             type:"LoginRequest"
+        })
+
+        // I have loginned on every server to set the cookie
+        const {data:dum1} = await axios.post(`${lendingURL}/lending/api/v1/auth/login/`,{email,password},{
+            headers:{
+                "Content-Type":"application/json"
+            }
+        })
+        const {data:dum2} = await axios.post(`${booksURL}/books/api/v1/auth/login/`,{email,password},{
+            headers:{
+                "Content-Type":"application/json"
+            }
         })
         const {data} = await axios.post(`${studentURL}/students/api/v1/auth/login/`,{email,password},{
             headers:{

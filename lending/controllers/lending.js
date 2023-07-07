@@ -89,7 +89,6 @@ const booksTakenByStudent = async(req,res) =>{
     }else{
         bookId = await Transaction.find({student:student}).select('book status issueDate dueDate')
     }
-    console.log(Date.now);
     books = await Promise.all(
         bookId.map(async (el) => {
           let book = await Book.findById(el.book).select("title author isbn description");
@@ -108,7 +107,6 @@ const booksTakenByStudent = async(req,res) =>{
           return {...data}
         })
     );
-    console.log(books[0].issueDate.getTime())
 
     // Comparator for sorting according to date
     function compare( a, b ) {
@@ -122,7 +120,6 @@ const booksTakenByStudent = async(req,res) =>{
       }
 
       books.sort(compare);
-      console.log(books);
       
     res.status(StatusCodes.OK).json({books})
 }
@@ -179,9 +176,39 @@ const getTransactions = async(req,res)=>{
 // Transactions exceeding due date
 const notReturned = async(req,res)=>{
     const transactions = await Transaction.find({ status:'issued',dueDate: { $lt: new Date() } });
-    console.log({ status:'issued',dueDate: { $lt: new Date() } });
     res.status(StatusCodes.OK).json({transactions})
 }
 
-module.exports = {takeBook,returnBook,booksTakenByStudent,studentsTakenBook,getTransactions,notReturned}
+const getTotalIssues = async(req,res) =>{
+    const issues = await Transaction.find({status:'issued'}).countDocuments()
+    const pending = await Transaction.find({ status:'issued',dueDate: { $lt: new Date() } }).countDocuments();
+    const issuess = await Transaction.find().countDocuments()
+    res.status(StatusCodes.OK).json({"current_issues":issues,"total_issues":issuess,"pending_returns":pending})
+}
+
+const getBooksIssuedByMonth = async (req, res) => {
+    const year = new Date().getFullYear();
+    const transactions = await Transaction.find({
+      issueDate: {
+        $gte: new Date(year, 0, 1),
+        $lte: new Date(year, 11, 31), 
+      },
+    });
+
+    const booksIssuedByMonth = new Array(12).fill(0);
+    const booksReturnedByMonth = new Array(12).fill(0);
+
+    transactions.forEach((transaction) => {
+      const month = transaction.issueDate.getMonth();
+      if (transaction.status === 'issued') {
+        booksIssuedByMonth[month] += 1; // Increment the count for the corresponding month
+      } else if (transaction.status === 'returned') {
+        booksReturnedByMonth[month] += 1; // Increment the count for the corresponding month
+      }
+    });
+    
+    res.status(StatusCodes.OK).json({ booksIssuedByMonth, booksReturnedByMonth });
+};
+
+module.exports = {takeBook,returnBook,booksTakenByStudent,studentsTakenBook,getTransactions,notReturned,getTotalIssues,getBooksIssuedByMonth}
 

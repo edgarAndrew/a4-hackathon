@@ -90,6 +90,18 @@ export const bookReducer = createReducer(initialState,{
         state.error = action.payload
     },
 
+    IssueBookRequest: (state,action)=>{
+        state.loading = true;
+    },
+    IssueBookSuccess: (state,action)=>{
+        state.message = action.payload;
+        state.loading = false;
+    },
+    IssueBookFailure: (state,action)=>{
+        state.error = action.payload
+        state.loading = false;     
+    },
+
     ReturnBookRequest: (state,action)=>{
         state.loading1 = true;
     },
@@ -100,6 +112,18 @@ export const bookReducer = createReducer(initialState,{
     ReturnBookFailure: (state,action)=>{
         state.error = action.payload
         state.loading1 = false;     
+    },
+
+    GetAllIssuesRequest: (state,action)=>{
+        state.loading = true;
+    },
+    GetAllIssuesSuccess: (state,action)=>{
+        state.issues = action.payload;
+        state.loading = false;
+    },
+    GetAllIssuesFailure: (state,action)=>{
+        state.error = action.payload
+        state.loading = false;     
     },
 
     clearErrors:(state,action)=>{

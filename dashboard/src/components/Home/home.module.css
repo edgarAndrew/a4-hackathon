@@ -1,0 +1,137 @@
+/* small screens ======================================== */
+/* header cards ============================ */
+.cardHeader {
+    text-transform: capitalize;
+    font-weight: 600;
+  }
+  
+  .cardGrid {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .cardCount {
+    margin-bottom: 0;
+  }
+  
+  .cardIcon {
+    display: none;
+  }
+  
+  .head_cards {
+    display: flex;
+    justify-content: space-evenly;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 20px;
+    flex-wrap: wrap;
+    margin: 1rem 0;
+  }
+  
+  .head_card {
+    flex-basis: 100%;
+  }
+  
+  /* chart styles ========================== */
+  .chartHeader {
+    display: flex;
+    gap: 10px;
+    justify-content: flex-start;
+    align-items: center;
+  }
+  
+  /* footer area ================ */
+  .home_footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    width: 100%;
+    flex-wrap: wrap;
+    margin: 1rem 0;
+    gap: 20px;
+  }
+  
+  .table_card {
+    border-radius: 8px;
+    margin-top: 1rem;
+  }
+  
+  .table_card th {
+    font-size: 1rem;
+    font-weight: 600;
+  }
+  
+  .table_card thead tr:first-child {
+    border-bottom: 2px solid var(--blue-gray-2);
+  }
+  
+  /* contracts => */
+  .contract_status {
+    text-transform: capitalize;
+    font-weight: 500;
+    font-size: 14px;
+  }
+  
+  .contract_date {
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--blue-gray-3);
+  }
+  
+  /* contact us => */
+  .contact_table {
+    flex-basis: 100%;
+  }
+  
+  .table_name {
+    text-transform: capitalize;
+    font-weight: 600;
+  }
+  
+  .contact_date {
+    color: var(--blue-gray-4);
+    font-weight: 500;
+  }
+  
+  /* blog activity ========================================== */
+  /* card container */
+  .cardContainer {
+    margin: 1rem 0;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+  }
+  
+  /* media queires ======================================== */
+  /* tablet screens */
+  @media screen and (min-width: 600px) {
+    .head_cards {
+      justify-content: space-evenly;
+      flex-direction: row;
+      align-items: center;
+    }
+    .head_card {
+      flex-basis: 40%;
+    }
+  
+    .contact_table {
+      flex-basis: 48%;
+      padding: 0.3rem;
+    }
+  }
+  /* large screens */
+  @media screen and (min-width: 900px) {
+    .head_cards {
+      justify-content: space-between;
+    }
+    .head_card {
+      flex-basis: 23%;
+      padding: 0 1rem;
+    }
+    .cardIcon {
+      display: flex;
+    }
+  }
+  
