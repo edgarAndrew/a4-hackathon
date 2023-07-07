@@ -68,6 +68,7 @@ export default function BooksModal({ isOpen, onCloseModal, selectedRowId }) {
   const formComponent = () => {
     return (
       <div>
+        <Typography variant="h4" align="center" marginBottom={3}>Students taken this book</Typography>
         <TableContainer>
         <Table sx={{ width: 1100 }} aria-label="customized table">
           <TableHead>

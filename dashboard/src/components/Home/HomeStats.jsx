@@ -110,6 +110,12 @@ const HomeStats = () => {
                         display: true,
                         text: 'Issues/Returns',
                       },
+                      ticks: {
+                        stepSize: 1,
+                        callback: function (value, index, values) {
+                          return value.toFixed(0);
+                        }
+                      }
                     },
                   },
                 }}
