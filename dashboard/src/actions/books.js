@@ -87,7 +87,6 @@ export const searchBook = (param,value)=>async(dispatch)=>{
         dispatch({
             type:"SearchBookRequest"
         })
-        console.log(param,value)
         let res = null
         if(param === 'title'){
             const {data} = await axios.get(`${booksURL}/books/api/v1/book/search?title=${value}`);
@@ -96,7 +95,6 @@ export const searchBook = (param,value)=>async(dispatch)=>{
             const {data} = await axios.get(`${booksURL}/books/api/v1/book/search?author=${value}`)
             res = data
         }
-        console.log(param,value)
         dispatch({
             type:"SearchBookSuccess",
             payload:res.book
@@ -141,6 +139,28 @@ export const studentsTakenBook = (id)=>async(dispatch)=>{
         console.log(error.response.data,error.response.status)
         dispatch({
             type:"StudentsTakenBookFailure",
+            payload:error.response.data.msg
+        })
+    }    
+}
+export const issueBook = (student,book)=>async(dispatch)=>{
+    try {
+        dispatch({
+            type:"IssueBookRequest"
+        })
+        const {data} = await axios.post(`${lendingURL}/lending/api/v2/`,{student,book},{
+            headers:{
+                "Content-Type":"application/json"
+            }
+        })
+        dispatch({
+            type:"IssueBookSuccess",
+            payload:data.msg
+        })
+    } catch (error) {
+        console.log(error.response.data,error.response.status)
+        dispatch({
+            type:"IssueBookFailure",
             payload:error.response.data.msg
         })
     }    

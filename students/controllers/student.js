@@ -55,11 +55,11 @@ const searchStudent = async(req,res)=>{
     let student = []
 
     if(username)
-        student = await User.find( { 'username' : { '$regex' : username, '$options' : 'i' } } ).select("_id username email contact profilePicture")
+        student = await User.find( { 'username' : { '$regex' : username, '$options' : 'i' } ,isStudent:true } ).select("_id username email contact profilePicture")
     if(email)
-        student = await User.find( { 'email' : { '$regex' : email, '$options' : 'i' } } ).select("_id username email contact profilePicture")
+        student = await User.find( { 'email' : { '$regex' : email, '$options' : 'i' } ,isStudent:true} , ).select("_id username email contact profilePicture")
     if(contact)
-        student = await User.find( { 'contact' : { '$regex' : contact, '$options' : 'i' } } ).select("_id username email contact profilePicture")
+        student = await User.find( { 'contact' : { '$regex' : contact, '$options' : 'i' } ,isStudent:true } ).select("_id username email contact profilePicture")
     
     res.status(StatusCodes.OK).json({student})
 }

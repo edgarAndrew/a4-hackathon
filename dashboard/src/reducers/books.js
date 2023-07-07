@@ -90,6 +90,18 @@ export const bookReducer = createReducer(initialState,{
         state.error = action.payload
     },
 
+    IssueBookRequest: (state,action)=>{
+        state.loading = true;
+    },
+    IssueBookSuccess: (state,action)=>{
+        state.message = action.payload;
+        state.loading = false;
+    },
+    IssueBookFailure: (state,action)=>{
+        state.error = action.payload
+        state.loading = false;     
+    },
+
     ReturnBookRequest: (state,action)=>{
         state.loading1 = true;
     },
