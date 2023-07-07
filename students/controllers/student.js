@@ -63,5 +63,9 @@ const searchStudent = async(req,res)=>{
     
     res.status(StatusCodes.OK).json({student})
 }
+const getNoOfStudents = async (req,res) => {
+    const rowCount = await User.countDocuments();
+    res.status(StatusCodes.OK).json({"no_of_students":rowCount})
+}
 
-module.exports = {addStudent,updateStudent,removeStudent,getStudent,getAllStudents,searchStudent}
+module.exports = {addStudent,updateStudent,removeStudent,getStudent,getAllStudents,searchStudent,getNoOfStudents}
