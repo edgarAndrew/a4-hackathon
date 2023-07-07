@@ -102,6 +102,18 @@ export const bookReducer = createReducer(initialState,{
         state.loading1 = false;     
     },
 
+    GetAllIssuesRequest: (state,action)=>{
+        state.loading = true;
+    },
+    GetAllIssuesSuccess: (state,action)=>{
+        state.issues = action.payload;
+        state.loading = false;
+    },
+    GetAllIssuesFailure: (state,action)=>{
+        state.error = action.payload
+        state.loading = false;     
+    },
+
     clearErrors:(state,action)=>{
         state.error = null
     },

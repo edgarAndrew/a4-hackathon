@@ -45,8 +45,12 @@ const searchBook = async(req,res)=>{
 }
 
 const getNoOfBooks = async (req,res) => {
-    const rowCount = await Book.countDocuments();
-    res.status(StatusCodes.OK).json({"no_of_books":rowCount})
+    let count = 0
+    const books = await Book.find({}).select('quantity')
+    books.map((el)=>{
+        count += el.quantity
+    })
+    res.status(StatusCodes.OK).json({"copies_in_stock":count,"no_of_books":books.length})
 }
 
 
