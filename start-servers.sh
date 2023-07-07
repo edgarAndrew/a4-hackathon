@@ -17,4 +17,10 @@ cd ..
 cd students
 npm test &
 
+# Start React App
+echo "Starting Student Server..."
+cd ..
+cd dashboard
+npm run dev &
+
 echo "All servers started."

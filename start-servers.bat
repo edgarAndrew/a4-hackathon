@@ -17,4 +17,10 @@ echo Starting Students Server...
 cd students
 start "" npm test
 
+REM Start React App
+cd ..
+echo Starting React App...
+cd dashboard
+start "" npm run dev
+
 echo All servers started.
