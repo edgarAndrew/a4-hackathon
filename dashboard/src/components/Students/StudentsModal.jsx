@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Box, Button } from "@mui/material";
+import { Box, Button,Backdrop,CircularProgress } from "@mui/material";
 import IconButton from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
 import CloseIcon from "@mui/icons-material/Close";
@@ -44,7 +44,7 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
 export default function StudentsModal({ isOpen, onCloseModal, selectedRowId }) {
     
     const dispatch = useDispatch()
-    const {books} = useSelector((state)=>state.student)
+    const {books,loading1} = useSelector((state)=>state.student)
     const {message} = useSelector((state)=>state.book)
     const alert = useAlert()
     
@@ -69,7 +69,11 @@ export default function StudentsModal({ isOpen, onCloseModal, selectedRowId }) {
     }
 
     const formComponent = () => {
-      return (
+      return (loading1 ?
+        <Backdrop open={true}>
+          <CircularProgress />
+        </Backdrop> 
+      : (
         <div>
           <Typography variant="h4" align="center" marginBottom={3}>Books taken by Student</Typography>
           <TableContainer>
@@ -122,7 +126,7 @@ export default function StudentsModal({ isOpen, onCloseModal, selectedRowId }) {
           </Table>
         </TableContainer>
         </div>
-      );
+      ))
   };
 
 
