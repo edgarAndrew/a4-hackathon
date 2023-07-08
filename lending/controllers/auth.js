@@ -4,6 +4,7 @@ const {UnauthenticatedError,BadRequestError} = require('../errors')
 
 // login for librarian,admin,students
 const login = async(req,res)=>{
+    console.log("login");
     const {email,password} = req.body;
     if(!email || !password)
         throw new BadRequestError('Please provide email & password')

@@ -27,9 +27,9 @@ const takeBook = async(req,res)=>{
     const {quantity} = await Book.findById(book).select("quantity")
 
     if(quantity > 0){
-        await Transaction.create({...req.body})
+        const book = await Transaction.create({...req.body})
         await Book.findByIdAndUpdate(book, { $inc: { quantity: -1 } });
-        res.status(StatusCodes.CREATED).json({msg:"Book issued"})
+        res.status(StatusCodes.CREATED).json({msg:"Book issued", dueDate: new Date(book.dueDate).toLocaleDateString(),issueDate: book.issueDate})
     }
     else
         throw new BadRequestError('No copies of this book are available')
@@ -99,7 +99,7 @@ const booksTakenByStudent = async(req,res) =>{
           const data = {
             status: el.status,
             issueDate: el.issueDate,
-            dueDate: el.dueDate,
+            dueDate: new Date(el.dueDate.getTime()).toLocaleDateString(),
             isDue:  dueResult
           };
           if(book)
