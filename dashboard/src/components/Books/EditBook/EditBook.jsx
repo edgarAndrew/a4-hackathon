@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import "./Editbook.css"
+import "../EditBook/EditBook.css"
 import {Backdrop,Button,CircularProgress, Typography} from '@mui/material'
 import {Done} from '@material-ui/icons'
 import { getBook,editBook } from '../../../actions/books'
