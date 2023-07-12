@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import "../../Books/AddBook/Addbook.css"
+import "../AddStudent/AddStudent.css"
 import {Button,Typography} from '@mui/material'
 import {Done} from '@material-ui/icons'
 import { addStudent } from '../../../actions/students'

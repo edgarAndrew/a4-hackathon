@@ -1,0 +1,884 @@
+{
+	"info": {
+		"_postman_id": "29a6e762-e9fd-47e0-8fc5-d992460f1ffd",
+		"name": "A4 hackathon",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "27993024",
+		"_collection_link": "https://dark-resonance-962866.postman.co/workspace/Team-Workspace~07eec3a0-d4db-4f31-8b2b-e5d04230997a/collection/27993024-29a6e762-e9fd-47e0-8fc5-d992460f1ffd?action=share&creator=27993024&source=collection_link"
+	},
+	"item": [
+		{
+			"name": "Books",
+			"item": [
+				{
+					"name": "Auth",
+					"item": [
+						{
+							"name": "register librarian",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"email\":\"librarian2@codehomies.com\",\r\n    \"username\":\"librarian2\",\r\n    \"password\":\"librarian123\",\r\n    \"contact\":\"9359090588\",\r\n    \"image\":null\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{booksURL}}/books/api/v1/auth/register",
+									"host": [
+										"{{booksURL}}"
+									],
+									"path": [
+										"books",
+										"api",
+										"v1",
+										"auth",
+										"register"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "login",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"email\":\"admin@codehomies.com\",\r\n    \"password\":\"admin123\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:5000/books/api/v1/auth/login",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "5000",
+									"path": [
+										"books",
+										"api",
+										"v1",
+										"auth",
+										"login"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "logout",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{booksURL}}/books/api/v1/auth/logout",
+									"host": [
+										"{{booksURL}}"
+									],
+									"path": [
+										"books",
+										"api",
+										"v1",
+										"auth",
+										"logout"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "verify-jwt",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{booksURL}}/books/api/v1/auth/verify-jwt",
+									"host": [
+										"{{booksURL}}"
+									],
+									"path": [
+										"books",
+										"api",
+										"v1",
+										"auth",
+										"verify-jwt"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "add book",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"isbn\":\"1118129387\",\r\n    \"title\":\"Life of Sachin\",\r\n    \"author\":\"Sachin Padwalkar\",\r\n    \"description\":\"Operating System Concepts, now in its ninth edition, continues to provide a solid theoretical foundation for understanding operating systems. The ninth edition has been thoroughly updated to include contemporary examples of how operating systems function.The text includes content to bridge the gap between concepts andactual implementations. End-of-chapter problems, exercises, review questions, and programming exercises help to further reinforce important concepts. \",\r\n    \"quantity\":6\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{booksURL}}/books/api/v1/book",
+							"host": [
+								"{{booksURL}}"
+							],
+							"path": [
+								"books",
+								"api",
+								"v1",
+								"book"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get all books",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{mainURL}}{{booksPORT}}/books/api/v1/book",
+							"host": [
+								"{{mainURL}}{{booksPORT}}"
+							],
+							"path": [
+								"books",
+								"api",
+								"v1",
+								"book"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get book",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{mainURL}}{{booksPORT}}/books/api/v1/book/648a24a4fed267e09bd9fe5c",
+							"host": [
+								"{{mainURL}}{{booksPORT}}"
+							],
+							"path": [
+								"books",
+								"api",
+								"v1",
+								"book",
+								"648a24a4fed267e09bd9fe5c"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update book",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"title\":\"LET US C\",\r\n    \"quantity\":8\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{booksURL}}/books/api/v1/book/648a24a4fed267e09bd9fe5c",
+							"host": [
+								"{{booksURL}}"
+							],
+							"path": [
+								"books",
+								"api",
+								"v1",
+								"book",
+								"648a24a4fed267e09bd9fe5c"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete book",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{booksURL}}/books/api/v1/book/648a24a4fed267e09bd9fe5c",
+							"host": [
+								"{{booksURL}}"
+							],
+							"path": [
+								"books",
+								"api",
+								"v1",
+								"book",
+								"648a24a4fed267e09bd9fe5c"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "search book",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{mainURL}}{{booksPORT}}/books/api/v1/book/search?title= &author= ",
+							"host": [
+								"{{mainURL}}{{booksPORT}}"
+							],
+							"path": [
+								"books",
+								"api",
+								"v1",
+								"book",
+								"search"
+							],
+							"query": [
+								{
+									"key": "title",
+									"value": " "
+								},
+								{
+									"key": "author",
+									"value": " "
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get no of books",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5000/books/api/v1/book/count",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"books",
+								"api",
+								"v1",
+								"book",
+								"count"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "Students",
+			"item": [
+				{
+					"name": "Auth",
+					"item": [
+						{
+							"name": "Login",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"email\":\"admin@codehomies.com\",\r\n    \"password\":\"admin123\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:5002/students/api/v1/auth/login",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "5002",
+									"path": [
+										"students",
+										"api",
+										"v1",
+										"auth",
+										"login"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "verify jwt",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{studentURL}}/students/api/v1/auth/verify-jwt",
+									"host": [
+										"{{studentURL}}"
+									],
+									"path": [
+										"students",
+										"api",
+										"v1",
+										"auth",
+										"verify-jwt"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "logout",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{studentURL}}/students/api/v1/auth/logout",
+									"host": [
+										"{{studentURL}}"
+									],
+									"path": [
+										"students",
+										"api",
+										"v1",
+										"auth",
+										"logout"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Add student",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\":\"student3@codehomies.com\",\r\n    \"username\":\"student3\",\r\n    \"password\":\"student123\",\r\n    \"contact\":\"9359090587\",\r\n    \"image\":null\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{studentURL}}/students/api/v1/student/",
+							"host": [
+								"{{studentURL}}"
+							],
+							"path": [
+								"students",
+								"api",
+								"v1",
+								"student",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get all students",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{studentURL}}/students/api/v1/student/",
+							"host": [
+								"{{studentURL}}"
+							],
+							"path": [
+								"students",
+								"api",
+								"v1",
+								"student",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get student",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{mainURL}}{{studentPORT}}/students/api/v1/student/648a1cce8542e7caa97bcc32",
+							"host": [
+								"{{mainURL}}{{studentPORT}}"
+							],
+							"path": [
+								"students",
+								"api",
+								"v1",
+								"student",
+								"648a1cce8542e7caa97bcc32"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update student",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\":\"John Smith\",\r\n    \"contact\":\"8975244332\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{studentURL}}/students/api/v1/student/648a1cce8542e7caa97bcc32",
+							"host": [
+								"{{studentURL}}"
+							],
+							"path": [
+								"students",
+								"api",
+								"v1",
+								"student",
+								"648a1cce8542e7caa97bcc32"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "remove student",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{studentURL}}/students/api/v1/student/648ab5e8655b429f07a84113",
+							"host": [
+								"{{studentURL}}"
+							],
+							"path": [
+								"students",
+								"api",
+								"v1",
+								"student",
+								"648ab5e8655b429f07a84113"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "search student",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{studentURL}}/students/api/v1/student/search?username=john",
+							"host": [
+								"{{studentURL}}"
+							],
+							"path": [
+								"students",
+								"api",
+								"v1",
+								"student",
+								"search"
+							],
+							"query": [
+								{
+									"key": "email",
+									"value": "student2@",
+									"disabled": true
+								},
+								{
+									"key": "contact",
+									"value": "93590",
+									"disabled": true
+								},
+								{
+									"key": "username",
+									"value": "john"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get no of students",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5002/students/api/v1/student/count",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5002",
+							"path": [
+								"students",
+								"api",
+								"v1",
+								"student",
+								"count"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Lending",
+			"item": [
+				{
+					"name": "Auth",
+					"item": [
+						{
+							"name": "login",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"email\":\"akash@codehomies.com\",\r\n    \"password\":\"123456\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{mainURL}}{{lendingPORT}}/lending/api/v1/auth/login",
+									"host": [
+										"{{mainURL}}{{lendingPORT}}"
+									],
+									"path": [
+										"lending",
+										"api",
+										"v1",
+										"auth",
+										"login"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "logout",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{mainURL}}{{lendingPORT}}/lending/api/v1/auth/logout",
+									"host": [
+										"{{mainURL}}{{lendingPORT}}"
+									],
+									"path": [
+										"lending",
+										"api",
+										"v1",
+										"auth",
+										"logout"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "verify jwt",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{lendingURL}}/lending/api/v1/auth/verify-jwt",
+									"host": [
+										"{{lendingURL}}"
+									],
+									"path": [
+										"lending",
+										"api",
+										"v1",
+										"auth",
+										"verify-jwt"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "take book / issue book",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"student\":\"648a1cce8542e7caa97bcc32\",\r\n    \"book\":\"648a2522fed267e09bd9fe5e\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{lendingURL}}/lending/api/v2/",
+							"host": [
+								"{{lendingURL}}"
+							],
+							"path": [
+								"lending",
+								"api",
+								"v2",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "return book",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"student\":\"648a1cce8542e7caa97bcc32\",\r\n    \"book\":\"648a24a4fed267e09bd9fe5c\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{lendingURL}}/lending/api/v2/return",
+							"host": [
+								"{{lendingURL}}"
+							],
+							"path": [
+								"lending",
+								"api",
+								"v2",
+								"return"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "books taken by a student",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5001/lending/api/v2/books-taken/648a1cce8542e7caa97bcc32",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5001",
+							"path": [
+								"lending",
+								"api",
+								"v2",
+								"books-taken",
+								"648a1cce8542e7caa97bcc32"
+							],
+							"query": [
+								{
+									"key": "status",
+									"value": "returned",
+									"disabled": true
+								},
+								{
+									"key": "status",
+									"value": "issued",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "students who taken a book",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{lendingURL}}/lending/api/v2/students-taken/648a2522fed267e09bd9fe5e",
+							"host": [
+								"{{lendingURL}}"
+							],
+							"path": [
+								"lending",
+								"api",
+								"v2",
+								"students-taken",
+								"648a2522fed267e09bd9fe5e"
+							],
+							"query": [
+								{
+									"key": "status",
+									"value": "returned",
+									"disabled": true
+								},
+								{
+									"key": "status",
+									"value": "issued",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "all issues",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{lendingURL}}/lending/api/v2/?status=issued",
+							"host": [
+								"{{lendingURL}}"
+							],
+							"path": [
+								"lending",
+								"api",
+								"v2",
+								""
+							],
+							"query": [
+								{
+									"key": "status",
+									"value": "issued"
+								},
+								{
+									"key": "status",
+									"value": "returned",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "issues passed due date",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Cookie",
+								"value": "jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NDhiNWEzYzg2YmQxNTkzMTZlNDdkMDUiLCJ1c2VybmFtZSI6ImFrYXNoMTIzIiwiaXNBZG1pbiI6ZmFsc2UsImlhdCI6MTY4ODM3NDMzMCwiZXhwIjoxNjg5MjM4MzMwfQ.qSgcFMWE0CA1JTAWylSElVOQVm0WXjMNO1vfrp4f6cA",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{mainURL}}{{lendingPORT}}/lending/api/v2/passed-due",
+							"host": [
+								"{{mainURL}}{{lendingPORT}}"
+							],
+							"path": [
+								"lending",
+								"api",
+								"v2",
+								"passed-due"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get lending graph",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5001/lending/api/v2/graph",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5001",
+							"path": [
+								"lending",
+								"api",
+								"v2",
+								"graph"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"variable": [
+		{
+			"key": "booksURL",
+			"value": "http://localhost:5000"
+		},
+		{
+			"key": "studentURL",
+			"value": "http://localhost:5000"
+		}
+	]
+}
