@@ -99,10 +99,26 @@ open Mobile App\lib\global_variable.dart
 static String ip = "YOUR-WIFI-IP";
 ```
 
+#### Hosted Url
+```
+  static String URL = "http://library-";
+  static String booksPORT = "books-api.vercel.app";
+  static String lendingPORT = "lendings-api.vercel.app";
+  static String studentPORT = "students-api.vercel.app";
+```
+
 
 #### Run the app
 ```
 flutter run
 ```
+
+
+#### Run Integration Test for mobile app
+Note: Make sure that the server is running
+```
+flutter test integration_test/app_test.dart
+```
+
 
 
