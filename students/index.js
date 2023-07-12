@@ -48,7 +48,7 @@ app.use("/students/api/v1/student", studentRouter);
 app.use(notFoundMiddleware);
 app.use(errorHandlerMiddleware);
 
-const port = process.env.PORT || 5004;
+const port = process.env.PORT || 5002;
 
 const start = async () => {
   try {
