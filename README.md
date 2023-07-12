@@ -15,6 +15,10 @@ https://tubular-sopapillas-0d7c3a.netlify.app/
 ##### email - libarian1@codehomies.com
 ##### password - librarian123
 
+#### Student
+##### email - student@codehomies.com
+##### password - student123
+
 ## Docker local setup
 
 #### Pull docker repositories
@@ -78,3 +82,27 @@ NOTE: Create your own administrator under the users model using mongo compass to
 
 ## API Endpoints
 Import the a4-hackathon.postman_collection JSON file in postman
+
+## Run Mobile App
+Connect your phone or use an emulator ([Watch Video](https://semicolon.dev/flutter/how-to-run-existing-flutter-app-in-vscode))
+
+### Terminal
+#### Check for any errors in Flutter or the Emulator:
+```
+flutter doctor
+```
+if any error resolve it first.
+
+#### Add API URL for local setup
+open Mobile App\lib\global_variable.dart
+```
+static String ip = "YOUR-WIFI-IP";
+```
+
+
+#### Run the app
+```
+flutter run
+```
+
+
