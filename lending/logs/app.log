@@ -1,0 +1,5 @@
+[2023-07-12T17:49:46.793Z] - {ERROR} - message:Book already issued to student, statuscode:400
+[2023-07-12T18:01:14.781Z] - {INFO} - message:Connected to MongoDB
+[2023-07-12T18:01:14.787Z] - {INFO} - message:Server listening on port 5001
+[2023-07-12T18:01:46.117Z] - {INFO} - message: Connected to MongoDB
+[2023-07-12T18:01:46.124Z] - {INFO} - message: Server listening on port 5001
