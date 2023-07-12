@@ -8,6 +8,7 @@ const app = express();
 
 const connectDB = require("./db/connect");
 const cookieParser = require("cookie-parser");
+const {info_logger,error_logger} = require('./logger')
 
 const authRouter = require("./api/auth");
 const studentRouter = require("./api/student");
@@ -53,12 +54,15 @@ const port = process.env.PORT || 5002;
 const start = async () => {
   try {
     await connectDB(process.env.MONGO_URI);
-    console.log("Connected to MongoDB");
+    info_logger.info("Connected to MongoDB")
     app.listen(port, "0.0.0.0", () => {
-      console.log(`Server listening on port ${port}`);
+      info_logger.info(`Server listening on port ${port}`)
     });
   } catch (err) {
-    console.log(err);
+    error_logger.error({
+      statusCode:500,
+      msg:"Could not connect to database"
+    })
   }
 };
 start();
